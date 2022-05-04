@@ -1,6 +1,8 @@
 https://github.com/Gregprod33/docker_symfony.git
 Créateur: Grégory Boës
 
+STACK NGINX PHP7.4 MYSQL8 PHPMYADMIN
+
 ## Commandes utiles Docker :
 
 - Purger Docker:
