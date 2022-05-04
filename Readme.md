@@ -1,4 +1,4 @@
-[https://github.com/Gregprod33/Docker-symfony5.git](https://github.com/Gregprod33/Docker-symfony5.git)
+https://github.com/Gregprod33/docker_symfony.git
 Créateur: Grégory Boës
 
 ## Commandes utiles Docker :
@@ -45,7 +45,16 @@ indique a Docker de build les images qui le nécessitent (dockerfile).
 - Une fois le repo cloné
     
     ouvrir le .env du dossier pour modifier le mp SQL.
+
+- Dans le dossier du projet Lancer le build de php (une fois le desktop docker ouvert) :
     
+    **docker-compose build --no-cache**
+
+- Lancer docker:
+
+    **docker-compose up**
+
+
 
 ### Configuration DOCKER :
 
@@ -62,19 +71,6 @@ indique a Docker de build les images qui le nécessitent (dockerfile).
 
 et voilà Le projet symfony est créé !
 
-- Attention, il faut maintenant modifier le fichier default.conf dans le folder nginx (en local), en effet, il faut lui préciser le nouvel emplacement du fichier index.php
-    
-    A la ligne 7 de default.conf à root : spécifier /var/www/project/nomDeMonProjet/public
-    
-    Relancer docker-compose up
-    
-    Et voilà :
-    
-    Rendez-vous sur localhost:8080.
-    
-
-
-## Installation des bundles Symfony
 
 Depuis le dossier var/www/project/NomDuProjet dans le bash du container php :
 
@@ -82,26 +78,39 @@ Depuis le dossier var/www/project/NomDuProjet dans le bash du container php :
 
     **composer require symfony/orm-pack**
 
+
+- Installation du bundle maker pour la création des controllers:
+
+    **composer require symfony/maker-bundle --dev**
+
+
+
 - Dans le fichier .env du projet symfony, changement des paramètres de la dB L26:
 
     décommenter la ligne relative à mySQL et changer les paramètres:
 
-**DATABASE_URL="mysql://nomDuUser:MotDePasse@mysql8-service:3306/NomDuProjet?serverVersion=8&charset=utf8mb4”**
+    **DATABASE_URL="mysql://nomDuUser:MotDePasse@mysql8-service:3306/NomDuProjet?serverVersion=8&charset=utf8mb4”**
 
-Commenter la ligne relative à postgre (l27)
+    Commenter la ligne relative à postgre (l27)
 
 
 - Enfin création de la base de données spécifiée dans le .env du projet symfony
     
     **php bin/console doctrine:database:create**
 
-    Rendez-vous sur localhost:5501 pour constater sa création dans phpMyAdmin
 
+
+- Attention, il faut maintenant modifier le fichier default.conf dans le folder nginx (en local), en effet, il faut lui préciser le nouvel emplacement du fichier index.php
     
-- Installation du bundle maker pour la création des controllers:
+    A la ligne 7 de default.conf à root : spécifier /var/www/project/nomDeMonProjet/public
+    Killer le container
+    Relancer docker-compose up
+    
+    Et voilà :
+    
+    Rendez-vous sur localhost:8080.
 
-    **composer require symfony/maker-bundle --dev**
-
+    Rendez-vous sur localhost:5501 pour vérifier la présence de la BDD
 
 
 Bon Dev :)
